@@ -14,19 +14,19 @@ const events: TimelineEvent[] = [
   {
     date: "Tháng 9, 2015",
     title: "Say 'I love you'",
-    description: "Khoảnh khắc mà cả thế giới như khựng lại chỉ còn hai đứa.",
+    description: "Khoảnh khắc mà cả thế giới như khựng lại chỉ còn 'đôi ta'.",
   },
   {
     date: "Tháng 9, 2025",
     title: "Lời cầu hôn",
     description:
-      "Câu hỏi được cất lên, và câu trả lời là một tiếng 'Đồng ý' trong niềm vui xen lẫn xúc động.",
+      "Làm vợ anh nhé? 💍",
   },
   {
     date: "29/03 & 04/04/2026",
     title: "Ngày cưới",
     description:
-      "Ngày chúng mình nói lời 'đồng ý' cho cả hành trình phía trước. Rất mong được cùng bạn chung vui và lưu lại khoảnh khắc đáng nhớ này.",
+      "Ngày chúng mình chính thức trở thành gia đình của nhau.",
   },
 ];
 
