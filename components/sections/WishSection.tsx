@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, useInView } from "framer-motion";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Send, Check, Heart, Lightbulb, Smile } from "lucide-react";
@@ -33,6 +34,12 @@ export default function WishSection() {
   const [error, setError] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
+  const [suggestionDropdownPos, setSuggestionDropdownPos] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
+  const suggestionDropdownRef = useRef<HTMLDivElement>(null);
   const [wishes, setWishes] = useState<WishEntry[]>([]);
   const [loadingWishes, setLoadingWishes] = useState(true);
 
@@ -65,7 +72,10 @@ export default function WishSection() {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const inContainer = containerRef.current?.contains(target);
+      const inSuggestionDropdown = suggestionDropdownRef.current?.contains(target);
+      if (!inContainer && !inSuggestionDropdown) {
         setShowSuggestions(false);
         setShowEmojis(false);
       }
@@ -75,6 +85,27 @@ export default function WishSection() {
       return () => document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [showSuggestions, showEmojis]);
+
+  useEffect(() => {
+    if (!showSuggestions || !containerRef.current) return;
+    const updatePosition = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setSuggestionDropdownPos({
+          top: rect.bottom + 8,
+          left: rect.left,
+          width: rect.width,
+        });
+      }
+    };
+    updatePosition();
+    window.addEventListener("scroll", updatePosition, true);
+    window.addEventListener("resize", updatePosition);
+    return () => {
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [showSuggestions]);
 
   const applyWish = (text: string) => {
     setMessage((prev) => (prev.trim() ? `${prev.trim()} ${text}` : text));
@@ -259,6 +290,14 @@ export default function WishSection() {
                     type="button"
                     onClick={() => {
                       setShowEmojis(false);
+                      if (containerRef.current && !showSuggestions) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        setSuggestionDropdownPos({
+                          top: rect.bottom + 8,
+                          left: rect.left,
+                          width: rect.width,
+                        });
+                      }
                       setShowSuggestions((s) => !s);
                     }}
                     className={cn(
@@ -288,30 +327,38 @@ export default function WishSection() {
                     <Smile className="w-4 h-4" />
                   </button>
                 </div>
-                {showSuggestions && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute left-0 right-0 top-full mt-2 z-20 max-h-64 overflow-y-auto rounded-xl border border-rose-200 bg-white shadow-lg"
-                  >
-                    <div className="p-2">
-                      {WISH_SUGGESTIONS.map((wish, i) => (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={() => applyWish(wish)}
-                          className={cn(
-                            "w-full text-left px-3 py-3 rounded-lg text-sm text-rose-800",
-                            "hover:bg-rose-50 transition-colors",
-                            i > 0 && "border-t border-rose-100"
-                          )}
-                        >
-                          {wish}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
+                {showSuggestions &&
+                  createPortal(
+                    <motion.div
+                      ref={suggestionDropdownRef}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="fixed z-[100] rounded-xl border border-rose-200 bg-white shadow-lg overflow-hidden"
+                      style={{
+                        top: suggestionDropdownPos.top,
+                        left: suggestionDropdownPos.left,
+                        width: suggestionDropdownPos.width,
+                      }}
+                    >
+                      <div className="max-h-64 overflow-y-auto p-2">
+                        {WISH_SUGGESTIONS.map((wish, i) => (
+                          <button
+                            key={i}
+                            type="button"
+                            onClick={() => applyWish(wish)}
+                            className={cn(
+                              "w-full text-left px-3 py-3 rounded-lg text-sm text-rose-800",
+                              "hover:bg-rose-50 transition-colors",
+                              i > 0 && "border-t border-rose-100"
+                            )}
+                          >
+                            {wish}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>,
+                    document.body
+                  )}
                 {showEmojis && (
                   <motion.div
                     initial={{ opacity: 0, y: 4 }}
