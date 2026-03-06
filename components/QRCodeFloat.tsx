@@ -54,9 +54,15 @@ export default function QRCodeFloat() {
         aria-label={ARIA_LABELS.weddingGift}
       >
         <div className="relative">
-          {/* Chibi couple */}
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-rose-400 to-gold-500 flex items-center justify-center shadow-lg shadow-rose-300/40 border-2 border-white">
-            <span className="text-2xl leading-none">💑</span>
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-rose-400 to-yellow-400 flex items-center justify-center shadow-lg border-2 border-white">
+            <Image
+              src="/images/swans.png"
+              alt="Wedding hands and heart"
+              width={40}
+              height={40}
+              className="w-8 h-8 object-contain"
+              priority
+            />
           </div>
           {/* Pulsing ring */}
           <div className="absolute inset-0 rounded-full border-2 border-rose-400/40 animate-ping" />

@@ -7,7 +7,7 @@ import { MESSAGES } from "@/constants";
 export async function GET() {
   try {
     const photos = await prisma.photo.findMany({
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     });
     return NextResponse.json(photos);
   } catch {
