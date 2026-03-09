@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { Toaster } from "sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import HeartRain from "@/components/HeartRain";
 import { getCurrentEventDate } from "@/lib/wedding-dates";
 import "./globals.css";
@@ -77,6 +78,7 @@ export default function RootLayout({
             },
           }}
         />
+        <SpeedInsights />
       </body>
     </html>
   );
