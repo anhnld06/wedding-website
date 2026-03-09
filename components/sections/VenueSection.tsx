@@ -38,7 +38,7 @@ const THANH_HON = {
 
 export default function VenueSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const directionsUrl = `https://www.google.com/maps/dir/81+Quang+Trung,+Th%E1%BA%A1ch+Thang,+H%E1%BA%A3i+Ch%C3%A2u,+%C4%90%C3%A0+N%E1%BA%B5ng+550000,+Vi%E1%BB%87t+Nam/V%C4%83n+Ph%C3%B2ng+B%C4%90S+T%C3%ADn+Ph%C3%A1t+Land,+%C4%90%C6%B0%E1%BB%9Dng+Nguy%E1%BB%85n+T%E1%BA%A5t+Th%C3%A0nh,+Li%C3%AAn+Thu%E1%BB%B7,+L%E1%BB%87+Th%E1%BB%A7y,+Qu%E1%BA%A3ng+B%C3%ACnh,+Vi%E1%BB%87t+Nam/@17.2276699,106.7971141,19.25z/data=!4m13!4m12!1m5!1m1!1s0x314218373f7b209d:0x6733c0f4bc3181a2!2m2!1d108.2187079!2d16.0740691!1m5!1m1!1s0x3140b1004d764e01:0x66561c2038ad004!2m2!1d106.7978801!2d17.2274914?entry=ttu&g_ep=EgoyMDI2MDMwMi4wIKXMDSoASAFQAw%3D%3D`;
   const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${TAN_MY_PALACE.mapQuery}&zoom=15`;
 

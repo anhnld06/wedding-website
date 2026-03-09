@@ -25,7 +25,7 @@ interface WishEntry {
 export default function WishSection() {
   const ref = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isNarrow = useMediaQuery("(max-width: 767px)");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");

@@ -9,118 +9,6 @@
 }
 
 @font-face {
-  font-family: "Sparkling Valentine";
-  src: url("/fonts/Sparkling.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Faith";
-  src: url("/fonts/Faith.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Adelia";
-  src: url("/fonts/Adelia.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Cherolina";
-  src: url("/fonts/Cherolina.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Majestric";
-  src: url("/fonts/Majestric.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "The Signature";
-  src: url("/fonts/Thesignature.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Boheme";
-  src: url("/fonts/Boheme.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "California";
-  src: url("/fonts/CALIFORNIA.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Burgundy";
-  src: url("/fonts/Burgundy.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Moonlight";
-  src: url("/fonts/moon.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Burgues";
-  src: url("/fonts/burgues.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Floral";
-  src: url("/fonts/floral.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gregonia";
-  src: url("/fonts/gregonia.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Lavonia";
-  src: url("/fonts/lavoni.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "BucThu";
   src: url("/fonts/bucthu.ttf") format("truetype");
   font-weight: 400;
@@ -129,8 +17,8 @@
 }
 
 @font-face {
-  font-family: "Daisy";
-  src: url("/fonts/daisy.otf") format("opentype");
+  font-family: "Moonlight";
+  src: url("/fonts/moon.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

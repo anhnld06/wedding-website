@@ -35,7 +35,7 @@ function calcTimeLeft(target: string): TimeLeft {
 
 export default function CountdownSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [targetDate, setTargetDate] = useState(VU_QUY_DATE);
   const [label, setLabel] = useState<string>(EVENT_LABELS.vuQuyFull);
   const [time, setTime] = useState<TimeLeft | null>(null);

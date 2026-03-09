@@ -5,26 +5,32 @@ import { motion } from "framer-motion";
 import { Music } from "lucide-react";
 import { ARIA_LABELS } from "@/constants";
 
+function createAudio() {
+  const audio = new Audio("/I-do(911).mp3");
+  audio.loop = true;
+  audio.volume = 0.3;
+  return audio;
+}
+
 export default function MusicPlayer() {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current = new Audio("/I-do(911).mp3");
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.3;
-  
     const handleFirstInteraction = () => {
+      if (!audioRef.current) {
+        audioRef.current = createAudio();
+      }
       audioRef.current
-        ?.play()
+        .play()
         .then(() => setPlaying(true))
         .catch(() => {});
-  
+
       window.removeEventListener("click", handleFirstInteraction);
     };
-  
+
     window.addEventListener("click", handleFirstInteraction);
-  
+
     return () => {
       window.removeEventListener("click", handleFirstInteraction);
       audioRef.current?.pause();
@@ -33,7 +39,9 @@ export default function MusicPlayer() {
   }, []);
 
   const toggle = () => {
-    if (!audioRef.current) return;
+    if (!audioRef.current) {
+      audioRef.current = createAudio();
+    }
     if (playing) {
       audioRef.current.pause();
     } else {

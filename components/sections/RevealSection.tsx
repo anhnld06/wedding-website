@@ -35,7 +35,7 @@ const sparkles = Array.from({ length: 20 }, (_, i) => ({
 
 export default function RevealSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const show = isInView;
 
   return (

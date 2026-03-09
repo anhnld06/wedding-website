@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useWeddingEventDate } from "@/hooks/use-wedding-event-date";
@@ -17,43 +18,24 @@ export default function HeroSection() {
     >
       {/* Background with parallax feel */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/images/hero-bg.jpg"
-          className="w-full h-full object-cover object-[center_35%]"
+          alt="Wedding invitation background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_35%]"
         />
       </div>
       {/* Dark red overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-rose-950/10 via-rose-900/10 to-rose-950/20" />
-
-      {/* Decorative particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-gold-300/40 rounded-full"
-            style={{
-              left: `${15 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 4 + i,
-              repeat: Infinity,
-              delay: i * 0.5,
-            }}
-          />
-        ))}
-      </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 0.3 }}
           className="text-rose-900 tracking-[0.4em] uppercase text-xs sm:text-sm mb-6 font-medium"
         >
@@ -63,7 +45,7 @@ export default function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 0.6 }}
           className="text-4xl sm:text-6xl md:text-7xl text-white mb-2 leading-tight"
           style={{ fontFamily: '"Aston Script", var(--font-serif), serif' }}
@@ -74,7 +56,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.9 }}
           className="flex items-center justify-center gap-4 my-3"
         >
@@ -86,7 +68,7 @@ export default function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 1.0 }}
           className="text-4xl sm:text-6xl md:text-7xl text-white mb-8 leading-tight"
           style={{ fontFamily: '"Aston Script", var(--font-serif), serif' }}
@@ -97,7 +79,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 1.3 }}
           className="text-rose-900 text-sm sm:text-base tracking-wider mb-10"
           style={{ fontFamily: '"Love Letter", var(--font-serif)' }}
@@ -108,7 +90,7 @@ export default function HeroSection() {
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, delay: 1.6 }}
           onClick={scrollToNext}
           className="group inline-flex items-center gap-2 px-8 py-3.5 border border-gold-400/50 text-gold-300 rounded-full text-sm tracking-[0.2em] uppercase hover:bg-gold-600/10 hover:border-gold-400 transition-all duration-500"
@@ -122,7 +104,7 @@ export default function HeroSection() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: false, margin: "-50px" }}
+        viewport={{ once: true, margin: "-50px" }}
         transition={{ delay: 2.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >

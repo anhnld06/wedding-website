@@ -9,7 +9,7 @@ import { FOOTER_CONTENT } from "@/constants";
 export default function FooterSection() {
   const { long: dateLong } = useWeddingEventDate();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section

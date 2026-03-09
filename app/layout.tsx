@@ -19,16 +19,38 @@ const inter = Inter({
 
 export const dynamic = "force-dynamic";
 
+function getBaseUrl(): string {
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return "http://localhost:3000";
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const { metadata: dateStr } = getCurrentEventDate();
   return {
+    metadataBase: new URL(getBaseUrl()),
     title: `Anh & Châu Wedding | ${dateStr}`,
     description:
       "You are invited to celebrate the wedding of Anh & Châu. Open the envelope and share your wishes.",
+    icons: {
+      icon: "/images/logo.svg",
+    },
     openGraph: {
       title: "Anh & Châu Wedding Invitation",
       description: `${dateStr} — TanMy Palace, QuangTri`,
       type: "website",
+      images: [
+        {
+          url: "/images/hero-bg.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Anh & Châu Wedding",
+        },
+      ],
     },
   };
 }

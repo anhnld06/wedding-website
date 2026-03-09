@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Copy, Download } from "lucide-react";
 import Image from "next/image";
-import FireWork from "@/components/FireWork";
 import { BANK_ACCOUNTS, ARIA_LABELS } from "@/constants";
+
+const FireWork = dynamic(() => import("@/components/FireWork"), { ssr: false });
 
 export default function QRCodeFloat() {
   const [open, setOpen] = useState(false);
@@ -109,7 +111,7 @@ export default function QRCodeFloat() {
               </div>
 
               <div className="space-y-2 sm:space-y-3 md:space-y-4">
-                <FireWork />
+                {open && <FireWork />}
                 {BANK_ACCOUNTS.map((acc) => (
                   <div
                     key={acc.role}
