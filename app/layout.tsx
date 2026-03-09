@@ -40,12 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
       icon: "/images/logo.svg",
     },
     openGraph: {
-      title: "Anh & Châu Wedding Invitation",
+      title: "Anh & Châu Wedding",
       description: `${dateStr} — TanMy Palace, QuangTri`,
       type: "website",
       images: [
         {
-          url: "/images/hero-bg.jpg",
+          url: "/images/og.jpg",
           width: 1200,
           height: 630,
           alt: "Anh & Châu Wedding",

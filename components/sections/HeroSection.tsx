@@ -28,7 +28,7 @@ export default function HeroSection() {
         />
       </div>
       {/* Dark red overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-rose-950/10 via-rose-900/10 to-rose-950/20" />
+      <div className="absolute inset-0 bg-gradient-to-b" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
