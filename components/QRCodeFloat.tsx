@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Copy, Download } from "lucide-react";
@@ -12,6 +12,22 @@ const FireWork = dynamic(() => import("@/components/FireWork"), { ssr: false });
 export default function QRCodeFloat() {
   const [open, setOpen] = useState(false);
   const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
+  const [labelVisible, setLabelVisible] = useState(false);
+
+  useEffect(() => {
+    if (open) return;
+    if (labelVisible) {
+      const hide = setTimeout(() => setLabelVisible(false), 2500);
+      return () => clearTimeout(hide);
+    } else {
+      const show = setTimeout(() => setLabelVisible(true), 5000);
+      return () => clearTimeout(show);
+    }
+  }, [labelVisible, open]);
+
+  useEffect(() => {
+    if (open) setLabelVisible(false);
+  }, [open]);
 
   const handleDownload = async (url: string, role: string) => {
     try {
@@ -55,7 +71,19 @@ export default function QRCodeFloat() {
         transition={{ delay: 2, duration: 0.6 }}
         aria-label={ARIA_LABELS.weddingGift}
       >
-        <div className="relative">
+        <motion.div
+          className="relative"
+          animate={
+            labelVisible && !open
+              ? { x: [0, -4, 4, -3, 3, -2, 2, 0] }
+              : { x: 0 }
+          }
+          transition={{
+            x: labelVisible && !open
+              ? { duration: 0.5, ease: "easeOut" }
+              : { duration: 0.2 },
+          }}
+        >
           <div className="w-14 h-14 rounded-full bg-gradient-to-br from-rose-400 to-yellow-400 flex items-center justify-center shadow-lg border-2 border-white">
             <Image
               src="/images/swans.png"
@@ -68,11 +96,44 @@ export default function QRCodeFloat() {
           </div>
           {/* Pulsing ring */}
           <div className="absolute inset-0 rounded-full border-2 border-rose-400/40 animate-ping" />
-          {/* Label */}
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
-            Mừng cưới
-          </div>
-        </div>
+          {/* Label - ẩn ban đầu, 5s sau hiện nảy bóng 2–3s rồi mất, lặp lại. Tắt khi modal mở */}
+          <AnimatePresence>
+            {labelVisible && !open && (
+              <motion.div
+                className="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center"
+                initial={{ opacity: 0, y: 0, scale: 0.8 }}
+                animate={{
+                  opacity: 1,
+                  y: [0, -12, 0, -8, 0, -5, 0, -2, 0],
+                  scale: [1, 1.1, 1, 1.08, 1, 1.05, 1, 1.02, 1],
+                }}
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.25 } }}
+                transition={{
+                  opacity: { duration: 0.2 },
+                  y: {
+                    duration: 2.2,
+                    times: [0, 0.12, 0.24, 0.4, 0.56, 0.7, 0.84, 0.94, 1],
+                    ease: "easeOut",
+                  },
+                  scale: {
+                    duration: 2.2,
+                    times: [0, 0.12, 0.24, 0.4, 0.56, 0.7, 0.84, 0.94, 1],
+                    ease: "easeOut",
+                  },
+                }}
+              >
+                <div className="bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap shadow-sm">
+                  Mừng cưới
+                </div>
+                {/* Mũi nhọn trỏ xuống QR float */}
+                <div
+                  className="w-0 h-0 -mt-px border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-rose-500"
+                  aria-hidden
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </motion.button>
 
       {/* QR Modal */}
