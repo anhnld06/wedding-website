@@ -22,7 +22,7 @@ const events: TimelineEvent[] = [
     description: "Làm vợ anh nhé? 💍",
   },
   {
-    date: "18 Tháng 3, 2026",
+    date: "16 Tháng 3, 2026",
     title: "Lễ đính hôn",
     description: "Chính thức đánh dấu bước khởi đầu cho hành trình về chung một nhà.",
   },

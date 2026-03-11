@@ -27,6 +27,7 @@ export default function WishSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isNarrow = useMediaQuery("(max-width: 767px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -168,15 +169,15 @@ export default function WishSection() {
       {/* Floating bubbles - 3 lanes × 4 trên mobile, 5 lanes × 4 trên desktop */}
       <div className="absolute inset-0 pointer-events-none">
         {displayWishes
-          .slice(0, isNarrow ? 12 : 20)
+          .slice(0, isNarrow ? 8 : isTablet ? 12 : 20)
           .map((wish, index) => (
             <WishBubble
               key={`${wish.name}-${index}`}
               name={wish.name}
               message={wish.message}
               index={index}
-              total={Math.min(displayWishes.length, isNarrow ? 12 : 20)}
-              laneCount={isNarrow ? 3 : 5}
+              total={Math.min(displayWishes.length, isNarrow ? 8 : isTablet ? 12 : 20)}
+              laneCount={isNarrow ? 1 : isTablet ? 2 : 5}
             />
           ))}
       </div>
@@ -425,18 +426,24 @@ function WishBubble({
   const duration = 22 + (index % 7);
   const repeatDelay = 10 + (index % 5);
   const laneIndex = index % laneCount;
-  // 3 lanes: 25, 50, 75 — rộng cách, không đè. 5 lanes: 18, 37, 55, 73, 92 → clamp 92→88
+  // 1 lane: 50 (center). 2 lanes: 25, 75. 3 lanes: 25, 50, 75. 5 lanes: 18, 37, 55, 73, 88
   const leftPercent =
-    laneCount === 3
-      ? 25 + laneIndex * 25
-      : 18 + laneIndex * ((88 - 18) / 4);
-  // Cùng lane: stagger lớn (duration + repeatDelay) để không gặp nhau dọc
+    laneCount === 1
+      ? 50
+      : laneCount === 2
+        ? 25 + laneIndex * 50
+        : laneCount === 3
+          ? 25 + laneIndex * 25
+          : 18 + laneIndex * ((88 - 18) / 4);
+  // 1 lane: liền kề nhau, cách ~10px (delay ~4s). Nhiều lane: stagger theo cycle
   const delay =
-    Math.floor(index / laneCount) * (duration + repeatDelay) + laneIndex * 2;
+    laneCount === 1
+      ? index * 4
+      : Math.floor(index / laneCount) * (duration + repeatDelay) + laneIndex * 2;
 
   return (
     <motion.div
-      className="absolute w-[140px] max-w-[45vw] sm:w-[200px] sm:max-w-[55vw] md:w-[240px] pointer-events-none"
+      className="absolute w-[280px] max-w-[85vw] sm:w-[200px] sm:max-w-[55vw] md:w-[240px] pointer-events-none"
       style={{ left: `${leftPercent}%`, bottom: 0, zIndex: index }}
       initial={{ opacity: 0, x: "-50%" }}
       animate={{
