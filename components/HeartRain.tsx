@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -12,15 +12,18 @@ function createHearts(count: number) {
     duration: 8 + Math.random() * 8,
     size: 12 + Math.random() * 16,
     opacity: 0.2 + Math.random() * 0.25,
+    driftX: (Math.random() - 0.5) * 80,
+    rotate: Math.random() * 360,
   }));
 }
 
 export default function HeartRain() {
   const isMobile = useMediaQuery("(max-width: 767px)");
-  const hearts = useMemo(
-    () => createHearts(isMobile ? 15 : 30),
-    [isMobile]
-  );
+  const [hearts, setHearts] = useState<ReturnType<typeof createHearts>>([]);
+
+  useEffect(() => {
+    setHearts(createHearts(isMobile ? 15 : 30));
+  }, [isMobile]);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-[1]">
@@ -35,8 +38,8 @@ export default function HeartRain() {
           }}
           animate={{
             y: ["0vh", "110vh"],
-            x: [0, (Math.random() - 0.5) * 80],
-            rotate: [0, Math.random() * 360],
+            x: [0, h.driftX],
+            rotate: [0, h.rotate],
           }}
           transition={{
             duration: h.duration,
