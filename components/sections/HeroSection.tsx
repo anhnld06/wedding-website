@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { useWeddingEventDate } from "@/hooks/use-wedding-event-date";
 
 export default function HeroSection() {
-  const { short: dateShort } = useWeddingEventDate();
+  const { short: dateShort, venueLine } = useWeddingEventDate();
   const scrollToNext = () => {
     document.getElementById("story")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -84,7 +84,7 @@ export default function HeroSection() {
           className="text-rose-900 text-sm sm:text-base tracking-wider mb-10"
           style={{ fontFamily: '"Love Letter", var(--font-serif)' }}
         >
-          {dateShort} &nbsp;&bull;&nbsp; TanMy Palace, QuangTri
+          {dateShort} &nbsp;&bull;&nbsp; {venueLine}
         </motion.p>
 
         <motion.button

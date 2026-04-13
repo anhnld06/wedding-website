@@ -7,7 +7,7 @@ import { useWeddingEventDate } from "@/hooks/use-wedding-event-date";
 import { FOOTER_CONTENT } from "@/constants";
 
 export default function FooterSection() {
-  const { long: dateLong } = useWeddingEventDate();
+  const { long: dateLong, venueLine } = useWeddingEventDate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -55,7 +55,7 @@ export default function FooterSection() {
             </div>
             <div className="flex items-center justify-center gap-2 text-rose-200/60 text-sm">
               <MapPin className="w-4 h-4 text-gold-400/60" />
-              <span>{FOOTER_CONTENT.venue}</span>
+              <span>{venueLine}</span>
             </div>
           </div>
 

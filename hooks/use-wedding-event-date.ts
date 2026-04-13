@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getCurrentEventDate } from "@/lib/wedding-dates";
 
 export function useWeddingEventDate() {
-  const [date, setDate] = useState(getCurrentEventDate);
+  const [date, setDate] = useState(() => getCurrentEventDate());
 
   useEffect(() => {
     const update = () => setDate(getCurrentEventDate());

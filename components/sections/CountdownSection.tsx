@@ -3,12 +3,14 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Heart } from "lucide-react";
-import { isVuQuyPhase, isThanhHonPhase } from "@/lib/wedding-dates";
+import { isVuQuyPhase, isThanhHonPhase, isBaoHyPhase } from "@/lib/wedding-dates";
 import {
   VU_QUY_DATE,
   THANH_HON_DATE,
+  BAO_HY_DATE,
   MARCH_2026,
   APRIL_2026,
+  APRIL_2026_BAO_HY,
   DAY_LABELS,
   COUNTDOWN_UNIT_LABELS,
   EVENT_LABELS,
@@ -36,24 +38,28 @@ function calcTimeLeft(target: string): TimeLeft {
 export default function CountdownSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [targetDate, setTargetDate] = useState(VU_QUY_DATE);
-  const [label, setLabel] = useState<string>(EVENT_LABELS.vuQuyFull);
+  const [label, setLabel] = useState<string>(EVENT_LABELS.vuQuy);
   const [time, setTime] = useState<TimeLeft | null>(null);
-  const [calendar, setCalendar] = useState<typeof MARCH_2026 | typeof APRIL_2026>(MARCH_2026);
+  const [calendar, setCalendar] = useState<
+    typeof MARCH_2026 | typeof APRIL_2026 | typeof APRIL_2026_BAO_HY
+  >(MARCH_2026);
 
   useEffect(() => {
     const update = () => {
       if (isVuQuyPhase()) {
-        setTargetDate(VU_QUY_DATE);
         setLabel(EVENT_LABELS.vuQuy);
         setCalendar(MARCH_2026);
         setTime(calcTimeLeft(VU_QUY_DATE));
       } else if (isThanhHonPhase()) {
-        setTargetDate(THANH_HON_DATE);
         setLabel(EVENT_LABELS.thanhHon);
         setCalendar(APRIL_2026);
         setTime(calcTimeLeft(THANH_HON_DATE));
+      } else if (isBaoHyPhase()) {
+        setLabel(EVENT_LABELS.baoHy);
+        setCalendar(APRIL_2026_BAO_HY);
+        setTime(calcTimeLeft(BAO_HY_DATE));
       } else {
+        setLabel(EVENT_LABELS.thanhHon);
         setCalendar(APRIL_2026);
         setTime({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
@@ -151,7 +157,7 @@ export default function CountdownSection() {
           </motion.p>
         )}
 
-        {/* Calendar: March (vu quy) or April (thành hôn) */}
+        {/* Calendar: March (vu quy) hoặc April (thành hôn / báo hỷ) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

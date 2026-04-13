@@ -32,7 +32,7 @@ function getBaseUrl(): string {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { metadata: dateStr } = getCurrentEventDate();
+  const { metadata: dateStr, venueLine } = getCurrentEventDate();
   return {
     metadataBase: new URL(getBaseUrl()),
     title: `Anh & Châu Wedding | ${dateStr}`,
@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: "Anh & Châu Wedding",
-      description: `${dateStr} — TanMy Palace, QuangTri`,
+      description: `${dateStr} — ${venueLine}`,
       type: "website",
       images: [
         {

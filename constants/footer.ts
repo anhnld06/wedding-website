@@ -3,7 +3,6 @@ export const FOOTER_CONTENT = {
   title: "Thank You",
   description:
     "We are deeply grateful for your love and support. Your presence on our special day would mean the world to us.",
-  venue: "TanMy Palace, QuangTri",
   signOff: "With all our love",
   coupleNames: "Anh & Châu",
   madeWith: "Made with love",
