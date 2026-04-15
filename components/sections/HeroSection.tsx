@@ -31,13 +31,13 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b" />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-2xl lg:max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-rose-900 tracking-[0.4em] uppercase text-xs sm:text-sm mb-6 font-medium"
+          className="text-rose-900 tracking-[0.4em] uppercase text-xs sm:text-sm lg:text-lg mb-6 lg:mb-8 font-medium"
         >
           The Wedding of
         </motion.p>
@@ -47,7 +47,7 @@ export default function HeroSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="text-4xl sm:text-6xl md:text-7xl text-white mb-2 leading-tight"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] text-white mb-2 lg:mb-3 leading-tight"
           style={{ fontFamily: '"Aston Script", var(--font-serif), serif' }}
         >
           Anh
@@ -58,11 +58,11 @@ export default function HeroSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="flex items-center justify-center gap-4 my-3"
+          className="flex items-center justify-center gap-4 lg:gap-6 my-3 lg:my-5"
         >
-          <div className="h-px w-16 bg-gold-400/60" />
-          <span className="text-gold-300 text-2xl font-serif italic">&</span>
-          <div className="h-px w-16 bg-gold-400/60" />
+          <div className="h-px w-16 lg:w-24 bg-gold-400/60" />
+          <span className="text-gold-300 text-2xl lg:text-5xl font-serif italic">&</span>
+          <div className="h-px w-16 lg:w-24 bg-gold-400/60" />
         </motion.div>
 
         <motion.h1
@@ -70,7 +70,7 @@ export default function HeroSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 1.0 }}
-          className="text-4xl sm:text-6xl md:text-7xl text-white mb-8 leading-tight"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] text-white mb-8 lg:mb-10 leading-tight"
           style={{ fontFamily: '"Aston Script", var(--font-serif), serif' }}
         >
           Châu
@@ -81,7 +81,7 @@ export default function HeroSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 1.3 }}
-          className="text-rose-900 text-sm sm:text-base tracking-wider mb-10"
+          className="text-rose-900 text-sm sm:text-base lg:text-xl tracking-wider mb-10 lg:mb-12"
           style={{ fontFamily: '"Love Letter", var(--font-serif)' }}
         >
           {dateShort} &nbsp;&bull;&nbsp; {venueLine}
@@ -93,10 +93,10 @@ export default function HeroSection() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, delay: 1.6 }}
           onClick={scrollToNext}
-          className="group inline-flex items-center gap-2 px-8 py-3.5 border border-gold-400/50 text-gold-300 rounded-full text-sm tracking-[0.2em] uppercase hover:bg-gold-600/10 hover:border-gold-400 transition-all duration-500"
+          className="group inline-flex items-center gap-2 px-8 py-3.5 lg:px-10 lg:py-4 border border-gold-400/50 text-gold-300 rounded-full text-sm lg:text-lg tracking-[0.2em] uppercase hover:bg-gold-600/10 hover:border-gold-400 transition-all duration-500"
         >
           Open Invitation
-          <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+          <ChevronDown className="w-4 h-4 lg:w-5 lg:h-5 group-hover:translate-y-0.5 transition-transform" />
         </motion.button>
       </div>
 
